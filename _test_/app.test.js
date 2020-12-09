@@ -5,15 +5,14 @@ const pool = require('../lib/utils/pool');
 const app = require('./lib/app');
 const Tea = require('../lib/models/Tea');
 // const data = require('../data/setup.sql');
-
+// `${__dirname}/../data/setup.sql`
 
 describe('app tests', () => {
   beforeEach(() => {
-    return pool.query(fs.readFileSync(`${__dirname}/../data/setup.sql`, 'utf-8'));
+    return pool.query(fs.readFileSync('./data/setup.sql', 'utf-8'));
   });
 
   afterAll(() => {
-
     return pool.end();
   });
 
