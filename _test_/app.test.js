@@ -4,11 +4,12 @@ const fs  = require('fs');
 const pool = require('../lib/utils/pool');
 const app = require('./lib/app');
 const Tea = require('../lib/models/Tea');
+// const data = require('../data/setup.sql');
 
 
 describe('app tests', () => {
   beforeEach(() => {
-    return pool.query(fs.readFileSync('./data/setup.sql', 'utf-8'));
+    return pool.query(fs.readFileSync('../data/setup.sql', 'utf-8'));
   });
 
   afterAll(() => {
