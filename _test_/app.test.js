@@ -1,3 +1,4 @@
+require('dotenv').config();
 const request = require('supertest');
 const fs  = require('fs');
 const pool = require('../lib/utils/pool');
