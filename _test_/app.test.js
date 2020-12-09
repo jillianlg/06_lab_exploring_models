@@ -68,4 +68,18 @@ describe('app tests', () => {
     });
   });
   
+  it('DELETES tea by id', async() => {
+    const tea = await Tea.insert({
+      type: 'black',
+      name: 'Red Dawn',
+      origin: 'China' 
+    });
+    
+    const response = await request(app)
+      .delete(`/api/v1/tea/${tea.id}`);
+
+    expect(response.body).toEqual({});
+  });
+  
 });
+
