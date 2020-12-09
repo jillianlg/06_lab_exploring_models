@@ -9,7 +9,7 @@ const Tea = require('../lib/models/Tea');
 
 describe('app tests', () => {
   beforeEach(() => {
-    return pool.query(fs.readFileSync('../data/setup.sql', 'utf-8'));
+    return pool.query(fs.readFileSync(`${__dirname}/../data/setup.sql`, 'utf-8'));
   });
 
   afterAll(() => {
