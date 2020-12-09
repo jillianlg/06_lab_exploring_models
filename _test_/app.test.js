@@ -32,7 +32,7 @@ describe('app tests', () => {
     });
   });
 
-  it('GETS tea by id', async() => {
+  it('GETs tea by id', async() => {
     const tea = await Tea.insert({
       type: 'black',
       name: 'Red Dawn',
@@ -44,4 +44,28 @@ describe('app tests', () => {
     
     expect(response.body).toEqual(tea);
   });
+
+  it('PUTs an update to tea by id', async() => {
+    const tea = await Tea.insert({
+      type: 'green',
+      name: 'Green Mao Jian',
+      origin: 'China' 
+    });
+
+    const response = await request(app)
+      .put(`/api/v1/tea/${tea.id}`)
+      .send({
+        type: 'black',
+        name: 'Red Dawn',
+        origin: 'China' 
+      });
+
+    expect(response.body).toEqual({
+      ...tea,
+      type: 'black',
+      name: 'Red Dawn',
+      origin: 'China'
+    });
+  });
+  
 });
