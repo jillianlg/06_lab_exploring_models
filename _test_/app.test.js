@@ -2,7 +2,7 @@ require('dotenv').config();
 const request = require('supertest');
 const fs  = require('fs');
 const pool = require('../lib/utils/pool');
-const app = require('./lib/app');
+const app = require('../lib/app');
 const Tea = require('../lib/models/Tea');
 // const data = require('../data/setup.sql');
 // `${__dirname}/../data/setup.sql`
