@@ -2,6 +2,7 @@ const request = require('supertest');
 const fs  = require('fs');
 const pool = require('../lib/utils/pool');
 const app = require('./lib/app');
+const Tea = require('../lib/models/Tea');
 
 
 describe('app tests', () => {
@@ -10,7 +11,7 @@ describe('app tests', () => {
   });
 
   afterAll(() => {
-    
+
     return pool.end();
   });
 
@@ -29,5 +30,18 @@ describe('app tests', () => {
       name: 'Red Dawn',
       origin: 'China'
     });
+  });
+
+  it('GETS tea by id', async() => {
+    const tea = await Tea.insert({
+      type: 'black',
+      name: 'Red Dawn',
+      origin: 'China' 
+    });
+
+    const response = await request(app)
+      .get(`/api/v1/tea/${tea.id}`);
+    
+    expect(response.body).toEqual(tea);
   });
 });
