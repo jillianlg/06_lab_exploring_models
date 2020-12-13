@@ -46,6 +46,32 @@ describe('app tests', () => {
     expect(response.body).toEqual(tea);
   });
 
+  it('GETs all tea', async() => {
+    const teas = await Promise.all([
+      {
+        type: 'black',
+        name: 'Red Dawn',
+        origin: 'China',
+      },
+      {
+        type: 'green',
+        name: 'Green Mao Jian',
+        origin: 'China',
+      },
+      {
+        type: 'Hibiscus',
+        name: 'Vanilla Red',
+        origin: 'Hawaii',
+      }
+    ].map(tea => Tea.insert(tea)));
+
+    const res = await request(app)
+      .get('/api/v1/tea');
+    
+    expect(res.body).toEqual(expect.arrayContaining(teas));
+    expect(res.body).toHaveLength(teas.length);
+  });
+
   it('PUTs an update to tea by id', async() => {
     const tea = await Tea.insert({
       type: 'green',
